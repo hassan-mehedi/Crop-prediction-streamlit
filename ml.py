@@ -19,8 +19,6 @@ y = df["label"]
 X = np.array(X)
 y = np.array(y)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
-
 grid = {"n_estimators": [10, 100, 200, 500, 1000, 1200],
         "max_depth": [None, 5, 10, 20, 30],
         "max_features": ["auto", "sqrt"],
@@ -37,7 +35,7 @@ rs_clf = RandomizedSearchCV(estimator=clf,
                             verbose=2)
 
 # Fit the RandomizedSearchCV version of clf
-rs_clf.fit(X_train, y_train)
+rs_clf.fit(X, y)
 params = rs_clf.best_params_
 
 n_estimators, min_samples_split, min_samples_leaf, max_features, max_depth = itemgetter(
